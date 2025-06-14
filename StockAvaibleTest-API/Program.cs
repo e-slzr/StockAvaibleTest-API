@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using System.Reflection;
 using StockAvaibleTest_API.Data;
 using StockAvaibleTest_API.Interfaces;
 using StockAvaibleTest_API.Repositories;
@@ -16,7 +18,25 @@ builder.Services.AddFluentValidationAutoValidation()
     .AddValidatorsFromAssemblyContaining<ProductValidator>();
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "Stock Available API",
+        Version = "v1",
+        Description = "API para gestión de inventario y stock disponible",
+        Contact = new OpenApiContact
+        {
+            Name = "Tegra",
+            Email = "support@tegra.com"
+        }
+    });
+
+    // Incluir comentarios XML para Swagger
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    c.IncludeXmlComments(xmlPath);
+});
 
 // Add AutoMapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -40,7 +60,11 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Stock Available API V1");
+        c.RoutePrefix = string.Empty; // Hacer Swagger UI la página principal
+    });
 }
 
 app.UseHttpsRedirection();

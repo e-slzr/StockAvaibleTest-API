@@ -1,0 +1,160 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>StockAvaibleTest-API</name>
+    </assembly>
+    <members>
+        <member name="M:StockAvaibleTest_API.Controllers.BoxesController.GetBoxes">
+            <summary>
+            Obtiene todas las cajas
+            </summary>
+        </member>
+        <member name="M:StockAvaibleTest_API.Controllers.BoxesController.GetBox(System.Int32)">
+            <summary>
+            Obtiene una caja por su ID
+            </summary>
+        </member>
+        <member name="M:StockAvaibleTest_API.Controllers.BoxesController.CreateBox(StockAvaibleTest_API.DTOs.CreateBoxDTO)">
+            <summary>
+            Crea una nueva caja
+            </summary>
+        </member>
+        <member name="M:StockAvaibleTest_API.Controllers.BoxesController.UpdateBox(System.Int32,StockAvaibleTest_API.DTOs.UpdateBoxDTO)">
+            <summary>
+            Actualiza una caja existente
+            </summary>
+        </member>
+        <member name="M:StockAvaibleTest_API.Controllers.BoxesController.DeleteBox(System.Int32)">
+            <summary>
+            Elimina una caja
+            </summary>
+        </member>
+        <member name="M:StockAvaibleTest_API.Controllers.BoxesController.GetProductQuantityInBox(System.Int32,System.Int32)">
+            <summary>
+            Obtiene la cantidad disponible de un producto en una caja específica
+            </summary>
+        </member>
+        <member name="M:StockAvaibleTest_API.Controllers.CategoriesController.GetCategories">
+            <summary>
+            Obtiene todas las categorías
+            </summary>
+        </member>
+        <member name="M:StockAvaibleTest_API.Controllers.CategoriesController.GetCategory(System.Int32)">
+            <summary>
+            Obtiene una categoría por su ID
+            </summary>
+        </member>
+        <member name="M:StockAvaibleTest_API.Controllers.CategoriesController.CreateCategory(StockAvaibleTest_API.DTOs.CreateCategoryDTO)">
+            <summary>
+            Crea una nueva categoría
+            </summary>
+        </member>
+        <member name="M:StockAvaibleTest_API.Controllers.CategoriesController.UpdateCategory(System.Int32,StockAvaibleTest_API.DTOs.UpdateCategoryDTO)">
+            <summary>
+            Actualiza una categoría existente
+            </summary>
+        </member>
+        <member name="M:StockAvaibleTest_API.Controllers.CategoriesController.DeleteCategory(System.Int32)">
+            <summary>
+            Elimina una categoría
+            </summary>
+        </member>
+        <member name="M:StockAvaibleTest_API.Controllers.ProductsController.GetProducts">
+            <summary>
+            Obtiene todos los productos
+            </summary>
+        </member>
+        <member name="M:StockAvaibleTest_API.Controllers.ProductsController.GetProduct(System.Int32)">
+            <summary>
+            Obtiene un producto por su ID
+            </summary>
+        </member>
+        <member name="M:StockAvaibleTest_API.Controllers.ProductsController.CreateProduct(StockAvaibleTest_API.DTOs.CreateProductDTO)">
+            <summary>
+            Crea un nuevo producto
+            </summary>
+        </member>
+        <member name="M:StockAvaibleTest_API.Controllers.ProductsController.UpdateProduct(System.Int32,StockAvaibleTest_API.DTOs.UpdateProductDTO)">
+            <summary>
+            Actualiza un producto existente
+            </summary>
+        </member>
+        <member name="M:StockAvaibleTest_API.Controllers.ProductsController.DeleteProduct(System.Int32)">
+            <summary>
+            Elimina un producto
+            </summary>
+        </member>
+        <member name="M:StockAvaibleTest_API.Controllers.ProductsController.GetProductStock(System.Int32)">
+            <summary>
+            Obtiene el stock disponible de un producto
+            </summary>
+        </member>
+        <member name="M:StockAvaibleTest_API.Controllers.ProductsController.GetLowStockProducts">
+            <summary>
+            Obtiene los productos con stock bajo
+            </summary>
+        </member>
+        <member name="M:StockAvaibleTest_API.Controllers.TransactionsController.GetTransactions">
+            <summary>
+            Obtiene todas las transacciones
+            </summary>
+        </member>
+        <member name="M:StockAvaibleTest_API.Controllers.TransactionsController.GetTransaction(System.Int32)">
+            <summary>
+            Obtiene una transacción por su ID
+            </summary>
+        </member>
+        <member name="M:StockAvaibleTest_API.Controllers.TransactionsController.CreateTransaction(StockAvaibleTest_API.DTOs.CreateTransactionDTO)">
+            <summary>
+            Crea una nueva transacción
+            </summary>
+        </member>
+        <member name="M:StockAvaibleTest_API.Controllers.TransactionsController.GetTransactionsByBox(System.Int32)">
+            <summary>
+            Obtiene todas las transacciones de una caja específica
+            </summary>
+        </member>
+        <member name="M:StockAvaibleTest_API.Controllers.TransactionsController.GetTransactionsByProduct(System.Int32)">
+            <summary>
+            Obtiene todas las transacciones de un producto específico
+            </summary>
+        </member>
+        <member name="T:StockAvaibleTest_API.Interfaces.IGenericRepository`1">
+            <summary>
+            Interface for generic repository operations
+            </summary>
+        </member>
+        <member name="T:StockAvaibleTest_API.Migrations.InitialCreate">
+            <inheritdoc />
+        </member>
+        <member name="M:StockAvaibleTest_API.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:StockAvaibleTest_API.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:StockAvaibleTest_API.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:StockAvaibleTest_API.Models.Box">
+            <summary>
+            Represents a storage box in the inventory system
+            </summary>
+        </member>
+        <member name="T:StockAvaibleTest_API.Models.BoxProductTransaction">
+            <summary>
+            Represents a transaction between a box and a product in the inventory system
+            </summary>
+        </member>
+        <member name="T:StockAvaibleTest_API.Models.Category">
+            <summary>
+            Represents a product category in the inventory system
+            </summary>
+        </member>
+        <member name="T:StockAvaibleTest_API.Models.Product">
+            <summary>
+            Represents a product in the inventory system
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -11,9 +11,27 @@ namespace StockAvaibleTest_API.Repositories
         {
         }
 
+        public override async Task<BoxProductTransaction?> GetByIdAsync(int id)
+        {
+            return await _context.BoxProductTransactions
+                .Include(t => t.Box)
+                .Include(t => t.Product)
+                .FirstOrDefaultAsync(t => t.Id == id);
+        }
+
+        public override async Task<IEnumerable<BoxProductTransaction>> GetAllAsync()
+        {
+            return await _context.BoxProductTransactions
+                .Include(t => t.Box)
+                .Include(t => t.Product)
+                .OrderByDescending(t => t.TransactionDate)
+                .ToListAsync();
+        }
+
         public async Task<IEnumerable<BoxProductTransaction>> GetTransactionsByBoxAsync(int boxId)
         {
             return await _context.BoxProductTransactions
+                .Include(t => t.Box)
                 .Include(t => t.Product)
                 .Where(t => t.BoxId == boxId)
                 .OrderByDescending(t => t.TransactionDate)
@@ -24,6 +42,7 @@ namespace StockAvaibleTest_API.Repositories
         {
             return await _context.BoxProductTransactions
                 .Include(t => t.Box)
+                .Include(t => t.Product)
                 .Where(t => t.ProductId == productId)
                 .OrderByDescending(t => t.TransactionDate)
                 .ToListAsync();
