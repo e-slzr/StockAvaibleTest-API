@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("StockAvaibleTest-API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+69474dd488eaeac9af6f95ef331054a557f51346")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+05aa350ce4336512bc15c125edcc8c90cc3781e6")]
 [assembly: System.Reflection.AssemblyProductAttribute("StockAvaibleTest-API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("StockAvaibleTest-API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
