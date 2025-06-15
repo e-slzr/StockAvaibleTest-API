@@ -136,6 +136,18 @@
         <member name="M:StockAvaibleTest_API.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:StockAvaibleTest_API.Migrations.AddTotalCapacityToBox">
+            <inheritdoc />
+        </member>
+        <member name="M:StockAvaibleTest_API.Migrations.AddTotalCapacityToBox.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:StockAvaibleTest_API.Migrations.AddTotalCapacityToBox.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:StockAvaibleTest_API.Migrations.AddTotalCapacityToBox.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
         <member name="T:StockAvaibleTest_API.Models.Box">
             <summary>
             Represents a storage box in the inventory system

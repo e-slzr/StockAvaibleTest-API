@@ -12,6 +12,7 @@ using StockAvaibleTest_API.Validators;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddCors();
 builder.Services.AddControllers();
 builder.Services.AddFluentValidationAutoValidation()
     .AddFluentValidationClientsideAdapters()
@@ -68,6 +69,29 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// Configure CORS for development
+app.UseCors(builder => builder
+    .AllowAnyOrigin()     // Permite peticiones desde cualquier origen
+    .AllowAnyMethod()     // Permite todos los métodos HTTP (GET, POST, PUT, DELETE, etc.)
+    .AllowAnyHeader());   // Permite todos los headers
+
+// Production CORS configuration
+/*
+// Configure CORS for production
+app.UseCors(builder => builder
+    .WithOrigins(
+        "http://yourdomain.com",
+        "https://yourdomain.com",
+        "http://localhost:3000"    // Si necesitas mantener acceso local
+    )
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+    .AllowCredentials()           // Si necesitas enviar cookies o auth headers
+    .SetIsOriginAllowedToAllowWildcardSubdomains() // Permite subdominios si usas un wildcard en WithOrigins
+);
+*/
+
 app.UseAuthorization();
 app.MapControllers();
 

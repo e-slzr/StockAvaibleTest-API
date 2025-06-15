@@ -7,5 +7,6 @@ namespace StockAvaibleTest_API.Interfaces
         Task<IEnumerable<Box>> GetBoxesWithTransactionsAsync();
         Task<Box?> GetBoxWithTransactionsAsync(int id);
         Task<int> GetAvailableProductQuantityAsync(int boxId, int productId);
+        Task<int> GetTotalProductsInBoxAsync(int boxId);
     }
 }

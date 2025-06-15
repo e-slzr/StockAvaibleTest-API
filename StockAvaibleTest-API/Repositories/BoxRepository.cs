@@ -31,10 +31,22 @@ namespace StockAvaibleTest_API.Repositories
                 .Where(t => t.BoxId == boxId && t.ProductId == productId)
                 .ToListAsync();
 
-            int inStock = transactions.Where(t => t.Type == "IN").Sum(t => t.Quantity);
-            int outStock = transactions.Where(t => t.Type == "OUT").Sum(t => t.Quantity);
+            int inQuantity = transactions.Where(t => t.Type == "IN").Sum(t => t.Quantity);
+            int outQuantity = transactions.Where(t => t.Type == "OUT").Sum(t => t.Quantity);
 
-            return inStock - outStock;
+            return inQuantity - outQuantity;
+        }
+
+        public async Task<int> GetTotalProductsInBoxAsync(int boxId)
+        {
+            var transactions = await _context.BoxProductTransactions
+                .Where(t => t.BoxId == boxId)
+                .ToListAsync();
+
+            int inQuantity = transactions.Where(t => t.Type == "IN").Sum(t => t.Quantity);
+            int outQuantity = transactions.Where(t => t.Type == "OUT").Sum(t => t.Quantity);
+
+            return inQuantity - outQuantity;
         }
     }
 }

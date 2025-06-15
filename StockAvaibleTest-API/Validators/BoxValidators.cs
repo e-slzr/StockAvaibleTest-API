@@ -14,6 +14,10 @@ namespace StockAvaibleTest_API.Validators
             RuleFor(x => x.Location)
                 .NotEmpty().WithMessage("La ubicación es requerida")
                 .MaximumLength(255).WithMessage("La ubicación no puede exceder los 255 caracteres");
+
+            RuleFor(x => x.TotalCapacity)
+                .GreaterThan(0).WithMessage("La capacidad total debe ser mayor a 0")
+                .NotEmpty().WithMessage("La capacidad total es requerida");
         }
     }
 
@@ -24,6 +28,11 @@ namespace StockAvaibleTest_API.Validators
             RuleFor(x => x.Location)
                 .NotEmpty().WithMessage("La ubicación es requerida")
                 .MaximumLength(255).WithMessage("La ubicación no puede exceder los 255 caracteres");
+
+            When(x => x.TotalCapacity.HasValue, () => {
+                RuleFor(x => x.TotalCapacity)
+                    .GreaterThan(0).WithMessage("La capacidad total debe ser mayor a 0");
+            });
         }
     }
 }

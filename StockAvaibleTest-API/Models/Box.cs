@@ -17,6 +17,10 @@ namespace StockAvaibleTest_API.Models
         [StringLength(255)]
         public string Location { get; set; } = string.Empty;
 
+        [Required]
+        [Range(1, int.MaxValue)]
+        public int TotalCapacity { get; set; }
+
         public DateTime? LastOperationDate { get; set; }
 
         // Navigation property

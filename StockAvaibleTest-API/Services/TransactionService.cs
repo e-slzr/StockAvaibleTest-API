@@ -55,7 +55,8 @@ namespace StockAvaibleTest_API.Services
                 await _unitOfWork.BeginTransactionAsync();
 
                 // Validar que existan la caja y el producto
-                if (!await _unitOfWork.Boxes.ExistsAsync(transactionDto.BoxId))
+                var box = await _unitOfWork.Boxes.GetByIdAsync(transactionDto.BoxId);
+                if (box == null)
                     return Result<TransactionDTO>.Failure($"No existe la caja con ID: {transactionDto.BoxId}");
 
                 var product = await _unitOfWork.Products.GetByIdAsync(transactionDto.ProductId);
@@ -74,6 +75,20 @@ namespace StockAvaibleTest_API.Services
                     if (availableInBox < transactionDto.Quantity)
                         return Result<TransactionDTO>.Failure("No hay suficiente stock en la caja para realizar la salida");
                 }
+                else if (transactionDto.Type == "IN")
+                {
+                    // Calcular cantidad actual en la caja
+                    var currentBoxQuantity = await _unitOfWork.Boxes
+                        .GetTotalProductsInBoxAsync(transactionDto.BoxId);
+
+                    // Validar capacidad de la caja
+                    if (currentBoxQuantity + transactionDto.Quantity > box.TotalCapacity)
+                    {
+                        var availableCapacity = box.TotalCapacity - currentBoxQuantity;
+                        return Result<TransactionDTO>.Failure(
+                            $"La cantidad excede la capacidad total de la caja. Capacidad disponible: {availableCapacity}");
+                    }
+                }
 
                 var transaction = _mapper.Map<BoxProductTransaction>(transactionDto);
                 transaction.TransactionDate = DateTime.UtcNow;
@@ -85,8 +100,7 @@ namespace StockAvaibleTest_API.Services
                 _unitOfWork.Products.Update(product);
 
                 // Actualizar última fecha de operación de la caja
-                var box = await _unitOfWork.Boxes.GetByIdAsync(transactionDto.BoxId);
-                box!.LastOperationDate = transaction.TransactionDate;
+                box.LastOperationDate = transaction.TransactionDate;
                 _unitOfWork.Boxes.Update(box);
 
                 await _unitOfWork.CompleteAsync();
