@@ -1,0 +1,30 @@
+# Directorios de compilación
+**/bin/
+**/obj/
+
+# Archivos de desarrollo
+**/.vscode/
+**/.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Archivos de Git
+.git/
+.gitignore
+
+# Archivos de dependencias
+**/node_modules/
+**/packages/
+
+# Archivos de ambiente
+*.env
+*.env.local
+
+# Archivos de logs
+*.log
+
+# Archivos temporales
+[Tt]emp/
+[Tt]mp/
