@@ -13,5 +13,6 @@ namespace StockAvaibleTest_API.Services
         Task<Result<int>> GetAvailableStockAsync(int productId);
         Task<Result<bool>> HasSufficientStockAsync(int productId, int quantity);
         Task<Result<IEnumerable<ProductDTO>>> GetLowStockProductsAsync();
+        Task<Result<ProductBoxLocationDTO>> GetProductLocationsAsync(int productId);
     }
 }

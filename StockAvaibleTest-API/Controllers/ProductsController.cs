@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using StockAvaibleTest_API.Common;
 using StockAvaibleTest_API.DTOs;
 using StockAvaibleTest_API.Services;
 
@@ -125,6 +126,24 @@ namespace StockAvaibleTest_API.Controllers
                 return StatusCode(500, result.Error);
 
             return Ok(result.Data);
+        }
+
+        /// <summary>
+        /// Obtiene todas las cajas que contienen un producto específico
+        /// </summary>
+        /// <param name="id">ID del producto</param>
+        /// <returns>Lista de cajas que contienen el producto y su stock actual</returns>
+        [HttpGet("{id}/locations")]
+        [ProducesResponseType(typeof(Result<ProductBoxLocationDTO>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetProductLocations(int id)
+        {
+            var result = await _productService.GetProductLocationsAsync(id);
+            
+            if (!result.IsSuccess)
+                return NotFound(result);
+
+            return Ok(result);
         }
     }
 }

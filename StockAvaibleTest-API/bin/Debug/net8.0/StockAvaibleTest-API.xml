@@ -94,6 +94,13 @@
             Obtiene los productos con stock bajo
             </summary>
         </member>
+        <member name="M:StockAvaibleTest_API.Controllers.ProductsController.GetProductLocations(System.Int32)">
+            <summary>
+            Obtiene todas las cajas que contienen un producto específico
+            </summary>
+            <param name="id">ID del producto</param>
+            <returns>Lista de cajas que contienen el producto y su stock actual</returns>
+        </member>
         <member name="M:StockAvaibleTest_API.Controllers.TransactionsController.GetTransactions">
             <summary>
             Obtiene todas las transacciones

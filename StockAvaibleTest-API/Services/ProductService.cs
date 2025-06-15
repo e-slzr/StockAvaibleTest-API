@@ -194,5 +194,42 @@ namespace StockAvaibleTest_API.Services
                 return Result<IEnumerable<ProductDTO>>.Failure($"Error al obtener los productos con bajo stock: {ex.Message}");
             }
         }
+
+        public async Task<Result<ProductBoxLocationDTO>> GetProductLocationsAsync(int productId)
+        {
+            try
+            {
+                var product = await _unitOfWork.Products.GetByIdAsync(productId);
+                if (product == null)
+                    return Result<ProductBoxLocationDTO>.Failure($"No se encontró el producto con ID: {productId}");                var transactions = await _unitOfWork.BoxProductTransactions.GetTransactionsByProductAsync(productId);
+
+                var boxesWithStock = transactions
+                    .GroupBy(t => new { t.BoxId, t.Box.Code, t.Box.Location })
+                    .Select(g => new BoxStockDTO
+                    {
+                        BoxId = g.Key.BoxId,
+                        BoxCode = g.Key.Code,
+                        Location = g.Key.Location,
+                        CurrentStock = g.Sum(t => t.Type == "IN" ? t.Quantity : -t.Quantity),
+                        LastTransactionDate = g.Max(t => t.TransactionDate)
+                    })
+                    .Where(b => b.CurrentStock > 0)
+                    .ToList();
+
+                var result = new ProductBoxLocationDTO
+                {
+                    ProductId = product.Id,
+                    ProductCode = product.Code,
+                    Description = product.Description,
+                    Boxes = boxesWithStock
+                };
+
+                return Result<ProductBoxLocationDTO>.Success(result);
+            }
+            catch (Exception ex)
+            {
+                return Result<ProductBoxLocationDTO>.Failure($"Error al obtener las ubicaciones del producto: {ex.Message}");
+            }
+        }
     }
 }
